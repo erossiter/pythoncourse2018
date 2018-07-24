@@ -5,7 +5,7 @@ Material for 2018 WashU summer course "Introduction to Python."
 ## Tentative Schedule
 
 | Day | Date | Material | Homework
-|----|----|----|----|----|
+|----|----|----|----|
 | Day01 | Mon 8/6 | Syntax |     |
 | Day02 | Tues 8/7 | Classes | HW1 assigned (due Fri. 8/10)
 | Day03 | Fri 8/10 | Exception handling |     |
