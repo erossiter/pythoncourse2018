@@ -2,7 +2,11 @@
 
 Material for 2018 WashU summer course "Introduction to Python."
 
+
 ## Tentative Schedule
+
+- Each day's material will be posted the morning of the class, at the latest
+- Homework due (last commit) *before* class
 
 | Day | Date | Material | Homework
 |----|----|----|----|
