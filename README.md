@@ -20,3 +20,6 @@ Material for 2018 WashU summer course "Introduction to Python."
 | Day08 | Tues 8/21 | Data structures |HW5 assigned (due Mon. 8/27)      |
 | Day09 | Fri 8/24 | Sql |     |
 
+
+
+- Course materials created by Matt Dickenson with slides added by Betul Demirkaya and changes over the years made by Dave Carlson, Michelle Torres, and myself.  Prior versions of course can all be found on GitHub.
