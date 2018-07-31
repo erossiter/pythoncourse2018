@@ -1,5 +1,5 @@
 import unittest
-from lab03_erin import *
+from lab03 import *
 
 class labTests(unittest.TestCase):
 	
