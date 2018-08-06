@@ -15,7 +15,7 @@ for i in range(1,11):
 
 fibonacci = [1,1]
 for i in range(2,11):
-    fibonacci[i].append(fibonacci[i-1] + fibonacci[i-2])
+    fibonacci.append(fibonacci[i-1] + fibonacci[i-2])
 
 fibonacci = []
 while len(fibonacci)<10:
