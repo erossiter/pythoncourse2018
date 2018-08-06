@@ -3,7 +3,7 @@
 
 ## Strings ------------------------------------------------
 
-s1 = "hi my name is erin". ## double quotes
+s1 = "hi my name is erin" ## double quotes
 
 s2 = 'how are you?' ## single quotes
 
@@ -41,13 +41,13 @@ print "\n".join(letters_list)
 ## Indexing is flexible in python
 ## What's happening here?
 num_string = "0123456789"
-print num_string[2:]
-print num_string[-2:]
-print num_string[:2]
-print num_string[:-2]
-print num_string[::2]
-print num_string[::-2]
-print num_string[::3]
+print num_string[2:] ## index 2 through end
+print num_string[-2:] ## index -2 through end
+print num_string[:2] ## up to index 2
+print num_string[:-2] ## up to index -2
+print num_string[::2] ## sequence, every other
+print num_string[::-2] ## sequence, every other from the end
+print num_string[::3] ## sequence, every third from beginning
 
 
 ## Integers ------------------------------------------------
@@ -149,6 +149,8 @@ print tup
 ## Like a list, but two key differences:
 ## - elements not ordered
 ## - elements are named with keys
+## Therefore, you have to index with key names
+## 
 ## Dictionaries are super useful!
 
 erin_info = {"name" : "Erin", "age" : 25, "pets" : ["Leonard", "Pogo"]}
@@ -209,6 +211,7 @@ hi = []
 for i in "hello":
 	hi.append(i)
 
+## more succinct way to write simple loop
 bye = [i for i in "goodbye"]
 
 
