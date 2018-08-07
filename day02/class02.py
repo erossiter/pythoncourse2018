@@ -6,7 +6,7 @@
 type(2)
 
 def print_int(int):
-  int = 5
+  #int = 5
   print 'Here is an integer: %s' %int ## blue means built-in
 
 
@@ -15,7 +15,7 @@ print_int('b')
 
 ## Check scope by commenting out int = 5 above
 def hi():
-  int = 2
+  #int = 2
   print_int(int)
 
 ## now coment out int = 2 above
@@ -122,7 +122,7 @@ class Human(object):
 		else: return self.speak("Hello. I'm %s" % self.name)
 
 dir(Human)
-me = Human(25, 'Female', "Erin")
+me = Human(age = 25, name = "Erin", sex = "Female")
 me.speak('Hello')
 me.introduce()
 
@@ -173,17 +173,19 @@ class School():
         else: self.db[student_grade] = [name] #if the key doesn't exist, create it and have kid start new list 
 
     def sort(self): #sorts kids alphabetically and returns them in tuples (because they are immutable)
-        sorted_students={} #sets up empty dictionary to store sorted tuples
+        #sorted_students={} #sets up empty dictionary to store sorted tuples
         for key in self.db.keys(): #loop through each key, automatically ordered
-            sorted_students[key] = tuple(sorted(self.db[key])) #add dictionary entry with key being the grade and the entry the tuple of kids
-        return sorted_students
+            self.db[key] = sorted(self.db[key]) #add dictionary entry with key being the grade and the entry the tuple of kids
+        #return sorted_students
 
     def grade(self, check_grade):
         if check_grade not in self.db: return None #if the key doesn't exist, there are no kids in that grade: return None
         return self.db[check_grade] #if None wasn't returned above, return elements within dictionary, or kids in grade
 
     def __str__(self): #print function will display the school name on one line, and sorted kids on other line
-        return "%s\n%s" %(self.school_name, self.sort())
+        #return "%s\n%s" %(self.school_name, self.sort())
+        return "%s\n%s" %(self.school_name, self.db)
+
 
 
 washu = School("Washington University in St. Louis")
@@ -191,7 +193,11 @@ washu.add("min hee", 5)
 washu.add("ryden", 4)
 washu.add("erin", 4)
 print washu.db
-sorted_students = washu.sort()
+
+## how you call it is different
+#sorted_students = washu.sort()
+washu.sort()
+
 print sorted_students
 print washu
 
@@ -211,7 +217,7 @@ class Parent():
     self.sex = sex
     self.firstname = firstname
     self.lastname = lastname
-    self.kids = []
+    self.kids = [] ## Child objects
 
   def role(self):
     if self.sex == "Male":
@@ -255,7 +261,6 @@ class Child():
 
 
 mom = Parent("Female", "Jane", "Smith")
-mom.list_children()
 jill = mom.have_child("Jill")
 jill.set_name("Jillian", "Jones")
 print jill.introduce()
@@ -417,12 +422,15 @@ print veggie_burger
 class Senator():
   def __init__(self, name):
     self.name = name
-    self.bills_voted_on = []
+    self.bills_voted_on = [] ## list of Bill objects
 
   def vote(self, bill, choice):
     #update the bill object--add the senator's name to the the list of yes/no/abstain
     #update the senator object--add this bill to the bills this senator has voted on
     #print an informative message announcing the vote 
+    bill.votes[choice].append(self.name)
+    self.bills_voted_on.append(bill)
+    print self.name + " votes " + choice + " on " + bill.title
 
 
 class Bill():
@@ -433,6 +441,12 @@ class Bill():
 
   def result(self):
     ## update and return the "passed" variable to indicate True/False if the bill passed
+    if len(self.votes["yes"]) > len(self.votes["no"]):
+      self.passed = True
+    else:
+      self.passed = False
+    return self.passed
+
 
 ## should be able to do these things
 jane = Senator("Jane")
