@@ -9,11 +9,23 @@ def print_int(int):
   int = 5
   print 'Here is an integer: %s' %int ## blue means built-in
 
+
 print_int(1)
 print_int('b')
 
+## Check scope by commenting out int = 5 above
+def hi():
+  int = 2
+  print_int(int)
 
-## Why did this throw an error?
+## now coment out int = 2 above
+int = 5
+hi()
+
+
+## Review from slides
+
+## Why did this throw an error?  What does the error say?
 def random_product(lower, upper):
 	random1
 	random2
@@ -32,7 +44,10 @@ def random_product(lower, upper):
 print random_product(0,1)
 
 
-##
+## This syntax means
+## - we are importing 1 thing: the 'random' module
+## - 'random' becomes a global name vs. all contained within it
+## - easily and unambiguously access member functions with .
 import random
 def random_product(lower, upper):
 	random1=random.uniform(lower, upper)
@@ -41,41 +56,57 @@ def random_product(lower, upper):
 
 print random_product(0,1)
 
-
-
+## Could also do this to call without modul name
+## Not considered best practice because it
+## - imports everything
+## - "pollutes" namespace
+## - unclear which names are present in namespace
+from random import *
+uniform(-1,1)
 
 
 ## Classes practice----------------------------------------------------
+## A class is a grouping of attributes (data/info) and methods (functions)
 
-class human(object):
+## basic class syntax is kindof like a function
+## convention is to capitalize, no underscores, definitely no dots
+class Human(object):
 	latin_name = 'homo sapien'
 
-me = human()
-you = human()
+## instances of the class
+me = Human()
+you = Human()
 
+## stored in memory somewhere
+me
+
+## all instances share this attribute
 me.latin_name
 you.latin_name
 
 
-## Class instantiation requires more info
-class human(object):
+## Now require class instantiation to take more info
+class Human(object):
 	latin_name = 'homo sapien'
+  ## __init__ is one of several special built-in functions that Python uses 
+  ## 'self' refers to current instance of class
+  ## need it as first arg so function can refer to other attributes and methods of the class!
 	def __init__(self, age, sex, name):
 		self.age = age
 		self.sex = sex
 		self.name = name
 
 
-me = human(age = 25, sex = 'Female', name = "Erin")
+me = Human(age = 25, sex = 'Female', name = "Erin")
 print me.name
 print me.age
 
-you = human()
+you = Human() ## why doesn't this work?
 
 
 
 ## Add some function objects
-class human(object):
+class Human(object):
 	latin_name = 'homo sapien'
 	def __init__(self, age, sex, name=None):
 		self.age = age
@@ -90,14 +121,14 @@ class human(object):
 		elif self.sex=='Male': return self.speak("Hello. I'm Mr. %s" % self.name)
 		else: return self.speak("Hello. I'm %s" % self.name)
 
-dir(human)
-me = human(25, 'Female', "Erin")
+dir(Human)
+me = Human(25, 'Female', "Erin")
 me.speak('Hello')
 me.introduce()
 
 
 ## Add definitions to built-in functions, like print() or summary() in R
-class human(object):
+class Human(object):
 	latin_name = 'homo sapien'
 	def __init__(self, age, sex, name=None):
 		self.age = age
@@ -118,7 +149,7 @@ class human(object):
 
 
 
-me = human(25, 'Female', "Erin")
+me = Human(25, 'Female', "Erin")
 print me
 
 
@@ -130,9 +161,8 @@ print me
 # - Get a sorted list of all students in all grades.
 # 
 # Note that all our students only have one name.
-# (It's a small town, what do you want?)
 
-class school():
+class School():
     def __init__(self, school_name): #initialize instance of class School with parameter name
         self.school_name = school_name #user must put name, no default
         self.db = {} #initialize empty dictionary to store kids and grades
@@ -156,7 +186,7 @@ class school():
         return "%s\n%s" %(self.school_name, self.sort())
 
 
-washu = school("Washington University in St. Louis")
+washu = School("Washington University in St. Louis")
 washu.add("min hee", 5)
 washu.add("ryden", 4)
 washu.add("erin", 4)
@@ -168,8 +198,8 @@ print washu
 print washu.grade(4)
 print washu.grade(2)
 
-## Can we add a different sort method to sort the students within the object?
-## How do we change the __str__ method?
+## Can we add a different sort method to sort the students ~within~ the object?
+## We'd need to change the __str__ method, too.
 
 
 
@@ -241,7 +271,7 @@ jack.siblings()
 ## Polymorphism -- child methods can override parent methods of same name
 
 
-## "parent" class
+## "parent" or general class
 class Animal(object):
 
   living = "Yes!" ## attribute of all Animal objects
@@ -256,7 +286,7 @@ class Animal(object):
     return True
 
 
-
+## "children" or specific classes
 class Cat(Animal):
   def talk(self):
     return self.meow() 
@@ -279,11 +309,9 @@ class Fish(Animal):
 
 
 
-
 leonard = Cat("Len")
 gus = Dog("Gus")
 nemo = Fish("nemo")
-
 
 animals = [leonard, gus, nemo]
 
@@ -392,8 +420,8 @@ class Senator():
     self.bills_voted_on = []
 
   def vote(self, bill, choice):
-    #update the bill object by adding the senator's name to the the list of yes/no/abstain
-    #add this bill to the bills this senator has voted on
+    #update the bill object--add the senator's name to the the list of yes/no/abstain
+    #update the senator object--add this bill to the bills this senator has voted on
     #print an informative message announcing the vote 
 
 
@@ -404,7 +432,7 @@ class Bill():
     self.passed = None
 
   def result(self):
-    ## update and return the passed variable to indicate True/False if the bill passed
+    ## update and return the "passed" variable to indicate True/False if the bill passed
 
 ## should be able to do these things
 jane = Senator("Jane")
