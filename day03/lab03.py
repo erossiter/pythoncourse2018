@@ -1,20 +1,23 @@
 import string
-## - write at least 1 custom exception
-##   (perhaps if input isn't a string or input is only one word vs. sentence)
-## - write tests in lab03_tests.py
-## - then code for the following functions
-## - try to have at least 1 try/catch
+## 1. write tests in lab03_tests.py
+## 2. then code for the following functions
+
+## Raising errors is more common when developing ------------------------
+
+## These functions all take a single string as an argument.
+## Presumably your code won't work for an int
+## raise a built-in (or custom!) exception if fed an int
 
 
 ## make all characters capitalized
 def shout(txt):
 
 
-## reverse entire string
+## reverse all characters in string
 def reverse(txt):
 
 
-## reverse just words in string
+## reverse word order in string
 def reversewords(txt):
 
 
@@ -24,6 +27,19 @@ def reversewordletters(txt):
 		
 ## change text to piglatin.. google it! 
 def piglatin(txt):
+
+
+
+
+## Try/catch is more common when using
+## someone else's code, scraping, etc. -----------------------------------
+
+## Loop over this string and apply the reverse() function.
+## Should throw errors if your exceptions are being raised!
+## Write a try/catch to handle this.
+ 
+string_list = ["hi", "hello there", 5, "hope this works", 100, "will it?"]
+
 
 		
 			
