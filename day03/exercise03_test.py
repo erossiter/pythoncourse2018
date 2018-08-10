@@ -1,5 +1,5 @@
 import unittest
-from exercise03 import *
+from exercise03_erin import *
 
 class exerciseTests(unittest.TestCase):
     

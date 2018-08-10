@@ -3,7 +3,7 @@ import string
 ##   (perhaps if input isn't a string or input is only one word vs. sentence)
 ## - write tests in lab03_tests.py
 ## - then code for the following functions
-## - have at least 1 try/catch
+## - try to have at least 1 try/catch
 
 
 ## make all characters capitalized
