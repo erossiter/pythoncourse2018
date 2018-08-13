@@ -33,6 +33,10 @@ fields = soup.find_all('h3') ## list of html entries
 all_a_tags = soup.find_all('a')
 all_a_tags[22]
 all_a_tags[22].attrs ## a dictionary with the attributes
+l = {"class" : [], "href" : []}
+for p in [22,23]:
+	l["class"].append(all_a_tags[p].attrs["class"])
+
 all_a_tags[22].attrs.keys()
 all_a_tags[22]['href']
 all_a_tags[22]['class']
