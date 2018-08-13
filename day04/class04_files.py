@@ -16,13 +16,15 @@ with open('test_readfile.txt') as f:
   for l in lines_list:
     print l
 
-## More efficiently we can loop over the file object (i.e. we don't need the variable lines)
+## More efficiently we can loop over the file object
+## (i.e. we don't need the variable lines)
 with open('test_readfile.txt') as f:   
   for l in f:
     print l
     
     
-## We can also manually open and close files, now we need to handle exceptions and close
+## We can also manually open and close files,
+## now we need to handle exceptions and close
 ## I never do this
 f =  open('test_readfile.txt')
 print f.read()

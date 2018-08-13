@@ -21,6 +21,7 @@ soup = BeautifulSoup(web_page.read())
 soup.prettify()
 
 ## Find all cases of a certain tag
+## Returns a list... remember this!
 soup.find_all('a')
 soup.find_all('h3')
 
@@ -30,15 +31,19 @@ fields = soup.find_all('h3') ## list of html entries
 
 # Get the attributes
 all_a_tags = soup.find_all('a')
+all_a_tags[22]
 all_a_tags[22].attrs ## a dictionary with the attributes
 all_a_tags[22].attrs.keys()
-all_a_tags[22]['alt']
+all_a_tags[22]['href']
+all_a_tags[22]['class']
+
 
 ## Use this info about HTML elements to grab them
 soup.find_all('a', {'class' : "person-view-primary-field"})
 
 ## There may be tags within tags
 sections = soup.find_all('div')
+len(sections)
 sections[2].a ## FIRST 'a' tag within the 'div' tag
 sections[2].find_all('a') ## ALL 'a' tags within the 'div' tag
 

@@ -2,8 +2,8 @@
 #### Using Selenium: An Example
 
 from selenium import webdriver
+from bs4 import BeautifulSoup as bs
 from selenium.webdriver.common.keys import Keys
-from bs4 import BeautifulSoup as bs, NavigableString
 import time
 
 def start_chrome(webpage):
@@ -20,6 +20,9 @@ def define_search(driver):
     time.sleep(2)
 
     keyword_elem = driver.find_element_by_name("query")
+
+    time.sleep(5)
+
     keyword_elem.send_keys("Shirley Clark")
 
     time.sleep(2)
@@ -46,6 +49,5 @@ def main(webpage):
     driver = define_search(driver)
     time.sleep(2)
     get_headlines(driver)
-
 
 main("http://www.spencerdailyreporter.com/")
