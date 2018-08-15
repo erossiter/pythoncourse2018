@@ -2,7 +2,7 @@
 
 ## Register an app: https://dev.twitter.com/
 
-#sudo pip install tweepy
+#pip install tweepy
 import tweepy
 import time
 

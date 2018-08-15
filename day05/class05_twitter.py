@@ -8,7 +8,7 @@ import tweepy
 import imp
 
 ## first arg is folder name, second arg is navigating to file
-twitter = imp.load_source('pythoncourse2018-prep', '../../pythoncourse2018-prep/day05/erinkeys/twitterkeys.py')
+twitter = imp.load_source('pythoncourse2018', '../../pythoncourse2018-prep/day05/erinkeys/twitterkeys.py')
 api = twitter.api
 
 
