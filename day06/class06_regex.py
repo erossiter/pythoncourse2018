@@ -32,10 +32,15 @@ alltext = ''.join(text)
 # re.compile
 
 
+## Can find a string
+
+
+re.findall(r"Yes we can", alltext)
+re.findall(r"American", alltext)
+re.findall(r"\n", alltext)
+
 ## Basic special characters
 
-re.findall(r"\n", alltext) 
-re.findall(r"Yes we can", alltext) 
 re.findall(r"\d", alltext) ##\d digits
 re.findall(r"\D", alltext) ##\d non-digits
 re.findall(r"[a]", alltext) ## any chars in []
@@ -59,12 +64,18 @@ re.findall(r"\d{3}", alltext) ## {x} exactly x times
 re.findall(r"\d{1,3}", alltext) ## {x, y} from x to y times
 
 
+## Parentheses give us just that portion
+
+re.findall(r"Yes we can", alltext)
+re.findall(r"(Yes) we can", alltext)
+
+
 ## Exercise: How would we grab 9/11 as it appears in text?
 
 
-## More practice with quantifiers
 
-re.findall(r"Yes.+\.", alltext)
+## Explain what's happening:
+
 re.findall(r"America[a-z]*", alltext)
 re.findall(r"([A-Z]+\w*)\W*", alltext)
 
@@ -105,8 +116,8 @@ for line in text:
 
 pattern = re.compile(r'\d') #Create a regex object
 
-pattern.split(alltext)
 pattern.findall(alltext)
+pattern.split(alltext)
 
 
 ## Can also search across lines in single strings
@@ -114,7 +125,7 @@ pattern.findall(alltext)
 
 mline = 'bin\nban\ncan'
 
-## ^ is start of the line
+## ^ is start of the string
 ## looking for b
 pattern = re.compile(r'^b\w*')
 pattern.findall(mline)
@@ -122,12 +133,15 @@ pattern.findall(mline)
 pattern = re.compile(r'^b\w*', re.MULTILINE)
 pattern.findall(mline)
 
-## now back to the speech...
+## Now back to the speech as a single string...
+## Explain the difference between thes two lines
 re.findall(r'^b\w*', alltext, re.MULTILINE)
+re.findall(r'^b\w*', alltext)
 
 
 ## Exercise
 ## Check if a line ends in a period
+## How is this working?
 re.findall(r'^.*\.$', alltext, re.MULTILINE)
 
 
@@ -143,6 +157,8 @@ tsearch.group(1) #the first group
 tsearch.group(2) #the second group
 
 
+## Similar to using () alone, but the text
+## matched by the group is then accessible
 pattern = re.compile(r'(?P<number>\d*)\s(?P<name>\w*)')
 tsearch = pattern.search(t)
 tsearch.groups()
@@ -158,5 +174,8 @@ pattern.search(mytext).group(1)
 pattern.search(mytext).group(2)
 
 
-
+## match starts search at beginning of string
+## like an invisible ^
+pattern.match("12 24").groups()
+pattern.match("a12 24").groups()
 

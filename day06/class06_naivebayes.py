@@ -1,7 +1,7 @@
 # pip install nltk
 
 import nltk
-nltk.download('names')
+#nltk.download('names')
 from nltk.corpus import names
 import random
 
@@ -14,6 +14,8 @@ random.shuffle(names)
 len(names)
 train_size = 5000
 
+train_names = names[:train_size]
+test_names = names[train_size:]
 
 ## A simple feature
 def g_features1(word):
@@ -25,9 +27,9 @@ def return_two():
 
 x, y = return_two()
 
-## Loop over names, return tuple of last letter and label
-features = [(g_features1(n), g) for (n,g) in names]
-train_set, test_set = features[:train_size], features[train_size:]
+## Loop over names, return tuple of dictionary and label
+train_set = [(g_features1(n), g) for (n,g) in train_names]
+test_set = [(g_features1(n), g) for (n,g) in test_names]
 classifier = nltk.NaiveBayesClassifier.train(train_set)
 
 classifier.classify(g_features1('Neo'))
@@ -54,24 +56,25 @@ def g_features2(name):
       features["has(%s)" % letter] = (letter in name.lower())
   return features
 
-features = [(g_features2(n), g) for (n,g) in names]
-train_set, test_set = features[:train_size], features[train_size:]
+train_set = [(g_features2(n), g) for (n,g) in train_names]
+test_set = [(g_features2(n), g) for (n,g) in test_names]
 classifier = nltk.NaiveBayesClassifier.train(train_set)
 print nltk.classify.accuracy(classifier, test_set)
 
 
 ## Worse? Better? How can we refine?
-# Lets look at the errors from first model and see if we can do better
+## Lets look at the errors from this model
+## and see if we can do better
 errors = []
-for (name, tag) in test_names:
+for (name, label) in test_names:
   guess = classifier.classify(g_features2(name))
-  if guess != tag:
+  if guess != label:
     prob = classifier.prob_classify(g_features2(name)).prob(guess)
-    errors.append((tag, guess, prob, name))
+    errors.append((label, guess, prob, name))
 
 
-for (tag, guess, prob, name) in sorted(errors):
-  print 'correct=%-10s guess=%-10s prob=%-10s name=%-10s' % (tag, guess, prob, name)
+for (label, guess, prob, name) in sorted(errors):
+  print 'correct=%-10s guess=%-10s prob=%-10s name=%-10s' % (label, guess, prob, name)
 
 
 
@@ -80,8 +83,8 @@ for (tag, guess, prob, name) in sorted(errors):
 def g_features3(name):
 
 
-features = [(g_features3(n), g) for (n,g) in names]
-train_set, test_set = features[:train_size], features[train_size:]
+train_set = [(g_features3(n), g) for (n,g) in train_names]
+test_set = [(g_features3(n), g) for (n,g) in test_names]
 classifier = nltk.NaiveBayesClassifier.train(train_set)
 print nltk.classify.accuracy(classifier, test_set)
 
@@ -121,10 +124,10 @@ def document_features(document):
 print document_features(movie_reviews.words('pos/cv957_8737.txt'))
 
 ## Now we have tuple of ({features}, label)
-features = [(document_features(d), c) for (d,c) in documents]
-train_set, test_set = features[1000:], features[:1000]
-len(train_set)
-len(test_set)
+train_docs = documents[:1000]
+test_docs = documents[1000:]
+train_set = [(document_features(d), c) for (d,c) in train_docs]
+test_set = [(document_features(d), c) for (d,c) in test_docs]
 classifier = nltk.NaiveBayesClassifier.train(train_set)
 
 print nltk.classify.accuracy(classifier, test_set)
