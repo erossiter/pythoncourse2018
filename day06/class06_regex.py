@@ -39,13 +39,15 @@ re.findall(r"Yes we can", alltext)
 re.findall(r"American", alltext)
 re.findall(r"\n", alltext)
 
+
 ## Basic special characters
 
 re.findall(r"\d", alltext) ##\d digits
-re.findall(r"\D", alltext) ##\d non-digits
+re.findall(r"\D", alltext) ##\D non-digits
 re.findall(r"[a]", alltext) ## any chars in []
 re.findall(r"[a-d]", alltext) ## any chars in []
 re.findall(r"[^a-d]", alltext) ## ^ except
+re.findall(r"[a-zA-Z0-9]", alltext)
 re.findall(r"\w", alltext) ## \w alphanumeric
 re.findall(r"\W", alltext) ## \W non-alphanumeric
 re.findall(r"\s", alltext) ## \s whitespace
@@ -70,13 +72,16 @@ re.findall(r"Yes we can", alltext)
 re.findall(r"(Yes) we can", alltext)
 
 
-## Exercise: How would we grab 9/11 as it appears in text?
+## Exercise: How would we grab 01/10 as it appears in text?
+x = "Hi 10/10 hello 9/18 asdf 9/9"
+re.findall(r"\d{2}/\d{2}", x)
 
 
 
 ## Explain what's happening:
-
-re.findall(r"America[a-z]*", alltext)
+x = "American's lov\we McDonalds"
+re.findall(r"\w", x)
+re.findall(r"America[a-z]*", x)
 re.findall(r"([A-Z]+\w*)\W*", alltext)
 
 
@@ -109,8 +114,9 @@ re.split(r'(\.)', alltext) ## () splits and keeps separator
 keyword = re.compile(r"America[a-z]*")
 
 ## search file for keyword in line by line version
-for line in text:
+for i, line in enumerate(text):
   if keyword.search(line):
+  	print i
     print line 
 
 
@@ -151,7 +157,7 @@ t = '12 twelve'
 
 pattern = re.compile(r'(\d*)\s(\w*)')
 tsearch = pattern.search(t)
-tsearch.groups() #list of all groups
+tsearch.groups() #tuple of all groups
 tsearch.group(0) #the complete match
 tsearch.group(1) #the first group
 tsearch.group(2) #the second group
@@ -176,6 +182,11 @@ pattern.search(mytext).group(2)
 
 ## match starts search at beginning of string
 ## like an invisible ^
-pattern.match("12 24").groups()
-pattern.match("a12 24").groups()
+pattern.match(r"12 24").groups()
+pattern.match(r"a12 24").groups()
+
+
+
+
+
 
