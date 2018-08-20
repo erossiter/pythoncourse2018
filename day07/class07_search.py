@@ -10,11 +10,11 @@ def linear_search(mylist, element):
   return None
 
 
-mylist = range(25)
+mylist = range(26)
 
 linear_search(mylist, 1)
 linear_search(mylist, 5)
-linear_search(mylist, 10)
+linear_search(mylist, 30)
 
 
 
@@ -38,3 +38,7 @@ def binary_search(sorted_list, element):
 
 mylist = range(25)
 binary_search(mylist, 10)
+
+
+
+
