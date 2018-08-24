@@ -61,14 +61,11 @@ class Author(Base):
     ## what does this do?
     books = relationship('Book', backref='author')
 
-
-    
     def __init__(self, name):
       self.name = name
     
     def __repr__(self):
       return "<Author('%s')>" % (self.name)
-
 
 
 
@@ -107,6 +104,9 @@ print country1
 book1.author=author1
 author1.country=country1
 
+
+
+
 print book1
 print author1
 print author1.books
@@ -129,8 +129,10 @@ session.add(country1)
 session.commit()
 
 print list(session.query(Author))
+
+all_authors = session.query(Author).all()
  
-for author in session.query(Author).all():
+for author in all_authors:
     print author.name, author.country.name
 # 
 book2=Book('anna karenina')
@@ -140,14 +142,22 @@ session.add(book2)
 
 book3=Book('tale of two cities')
 session.add(book3)
-# 
+ 
+
+
+for book in session.query(Book):
+    print book
+
+for author in session.query(Author):
+    print author
+
+xx = session.query(Book, Author).all()
 for book, author in session.query(Book, Author):
-    print book.name, author.name
-#  
+    print author.name
+  
 for book, author in session.query(Book, Book.author):
- 	  print book.name, author
-# 
-# 
+ 	  print author
+
 for book, author in session.query(Book, Author).filter(Book.author != None):
    	print book.name, author.name
 # 	

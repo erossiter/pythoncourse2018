@@ -87,17 +87,18 @@ Base.metadata.create_all(engine)
 # - SQLAlchemy represent info for specific table with Table object
 # So what columns do we have?
 Player.__table__  
+Team.__table__
 
 
 
-## Very similar logic to what we've done before!
-## one instance each table
-p1 = Player(name = "Erin", number = 25)
-t1 = Team(name = "WashU")
-## add team reference to player 
-p1.team = t1
-## now a part of team object
-t1.players
+# ## Very similar logic to what we've done before!
+# ## one instance each table
+# p1 = Player(name = "Erin", number = 25)
+# t1 = Team(name = "WashU")
+# ## add team reference to player 
+# p1.team = t1
+# ## now a part of team object
+# t1.players
 
 
 
@@ -138,13 +139,16 @@ session.commit()
 # Test again... (it keeps the count in the order they entered the database)
 print str(mason.id)
 
+
 # Some querying
 # order the results
 # you can think of it as... session.query(TABLE).order_by(COLUMN)
 for player in session.query(Player).order_by(Player.number):
   print player.number, player.name, player.id
   
-# limit the results 
+# limit the results
+# 1. orders by number
+# 2. grab by index
 for player in session.query(Player).order_by(Player.number)[1:3]:
   print player.number, player.name
 
@@ -175,8 +179,14 @@ results.first()
 results[0]
 results[1]
 
+len(results)
+
+
 # why use .count()?
 session.query(Player).filter(and_(Player.name.like("%Plumlee%"), Player.number > 10)).order_by(Player.number).count()
+
+
+
 
 ## Now to relations
 ## Player and Team tables
@@ -186,6 +196,10 @@ duke = Team('Duke')
 players = session.query(Player).all()
 mason.team = duke
 players[1].team = duke
+
+
+duke.players
+mason.team
 
 ## see additions in team object
 duke.players
@@ -239,6 +253,13 @@ session.dirty
 
 # commit our changes
 session.commit()
+
+
+[p.id for p in players]
+
+erin = Player(name = "erin", number = 10)
+
+session.add(erin)
 
 
 # How to convert data to csv
