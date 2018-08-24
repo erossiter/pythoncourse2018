@@ -109,7 +109,7 @@ session.commit()
 
 # Some example querying 
 for town in session.query(Town).order_by(Town.id):
-  print town.name, town.population
+  print town.id, town.name, town.population
 
 
 # TODO: 

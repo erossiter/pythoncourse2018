@@ -145,21 +145,21 @@ session.add(book3)
  
 
 
-for book in session.query(Book):
-    print book
+for b in session.query(Book):
+    print b
 
-for author in session.query(Author):
-    print author
+for a in session.query(Author):
+    print a
 
 xx = session.query(Book, Author).all()
-for book, author in session.query(Book, Author):
-    print author.name
+for row in session.query(Book, Author):
+    print row
   
-for book, author in session.query(Book, Book.author):
- 	  print author
+for x, y in session.query(Book, Book.author):
+ 	  print x, y
 
-for book, author in session.query(Book, Author).filter(Book.author != None):
-   	print book.name, author.name
+# for book, author in session.query(Book, Author).filter(Book.author != None):
+#    	print book.name, author.name
 # 	
 for book in session.query(Book).join(Author):
    	print book.name, book.author.name
